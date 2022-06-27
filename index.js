@@ -6,12 +6,31 @@ const path = require("path");
 
 const app = express();
 
+//locally stored movie information in an array
 let movies = [
   {
     isbn: "49559966",
     title: "Jaws",
     genre: "Horror",
     rating: "9",
+  },
+  {
+    isbn: "79534266",
+    title: "Green Mile",
+    genre: "Thriller",
+    rating: "9",
+  },
+  {
+    isbn: "23949558",
+    title: "Cats",
+    genre: "Comedy",
+    rating: "3",
+  },
+  {
+    isbn: "55949938",
+    title: "Indiana Jones",
+    genre: "Thriller",
+    rating: "8",
   },
 ];
 
