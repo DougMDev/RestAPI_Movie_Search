@@ -34,9 +34,8 @@ const loadMovies = () => {
             </div>
         `;
 
-    document.getElementById("movies").innerHTML = document.getElementById(
-      "movies"
-    ).innerHTML = q;
+    document.getElementById("movies").innerHTML =
+      document.getElementById("movies").innerHTML + q;
   }
 };
 

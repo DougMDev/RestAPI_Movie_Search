@@ -40,8 +40,7 @@ app.post("/movies", (req, res) => {
   const movie = req.body;
   console.log(movie);
   movies.push(movie);
-
-  res.send("Movie has been added to the database");
+  res.redirect("/viewmovies");
 });
 
 app.get("/movies", (req, res) => {
