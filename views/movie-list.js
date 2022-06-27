@@ -1,6 +1,30 @@
-const setEditModal = (isbn) => {};
+const setEditModal = (isbn) => {
+  const xhttp = new XMLHttpRequest();
 
-const deleteMovie = (isbn) => {};
+  xhttp.open("GET", `http://localhost:3000/movies/${isbn}`, false);
+  xhttp.send();
+
+  const movie = JSON.parse(xhttp.responseText);
+  const { title, genre, rating } = movie;
+  document.getElementById("isbn").value = isbn;
+  document.getElementById("title").value = title;
+  document.getElementById("genre").value = genre;
+  document.getElementById("rating").value = rating;
+
+  document.getElementById(
+    "editForm"
+  ).action = `http://localhost:3000/movies/${isbn}`;
+};
+
+const deleteMovie = (isbn) => {
+  const xhttp = new XMLHttpRequest();
+  console.log(`Movie Delete Request Sent. Id is ${isbn}`);
+
+  xhttp.open("DELETE", `http://localhost:3000/movies/${isbn}`, false);
+  xhttp.send();
+
+  location.reload();
+};
 
 const loadMovies = () => {
   const xhttp = new XMLHttpRequest();

@@ -54,6 +54,7 @@ app.get("/newmovie", (req, res) => {
 app.get("/viewmovies", (req, res) => {
   res.render("movie-list");
 });
+
 //Specific Routes
 app.post("/movies", (req, res) => {
   const movie = req.body;
@@ -62,8 +63,48 @@ app.post("/movies", (req, res) => {
   res.redirect("/viewmovies");
 });
 
+// Receive JSON data about the movies in the POST request
 app.get("/movies", (req, res) => {
   res.json(movies);
+});
+
+app.get("/movies/:isbn", (req, res) => {
+  //Reading isbn
+  const isbn = req.params.isbn;
+  //Loop through movies for the isbn
+  for (let movie of movies) {
+    if (movie.isbn === isbn) {
+      res.json(movie);
+      return;
+    }
+  }
+  res.status(404).send("Sorry, Movie Not Found!");
+});
+
+app.post("/movies/:isbn", (req, res) => {
+  //Read URL info
+  const isbn = req.params.isbn;
+  const newMovie = req.body;
+
+  //Remove item from the books array
+  for (let i = 0; i < movies.length; i++) {
+    let movie = movies[i];
+    if (movie.isbn === isbn) {
+      movies[i] = newMovie;
+    }
+  }
+  res.redirect("/viewmovies");
+});
+
+app.delete("/movies/:isbn", (req, res) => {
+  const isbn = req.params.isbn;
+  //Remove an item from the array of movies
+  movies = movies.filter((i) => {
+    if (i.isbn !== isbn) {
+      return true;
+    }
+    return false;
+  });
 });
 
 //port listener
